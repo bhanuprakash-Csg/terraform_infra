@@ -71,12 +71,12 @@ variable "vm_size" {
   type        = string
 }
 
-variable "admin_username" {
+variable "ec2_admin_username" {
   description = "Admin username for the VM"
   type        = string
 }
 
-variable "admin_password" {
+variable "ec2_admin_password" {
   description = "Admin password for the VM"
   type        = string
   sensitive   = true
@@ -96,14 +96,27 @@ variable "public_ip_name" {
 variable "db_name" {
   description = "MySQL Flexible Server Name"
   type        = string
+  sensitive = true
 }
-
 variable "db_admin" {
   description = "MySQL Admin Username"
   type        = string
+  sensitive =  true
 }
 
 variable "db_password" {
+  description = "MySQL Admin Password"
+  type        = string
+  sensitive   = true
+}
+
+variable "sql_db_admin" {
+  description = "MySQL Admin Username"
+  type        = string
+  sensitive = true
+}
+
+variable "sql_db_password" {
   description = "MySQL Admin Password"
   type        = string
   sensitive   = true
