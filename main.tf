@@ -31,8 +31,8 @@ module "compute" {
   location            = var.location
   vm_name             = var.vm_name
   vm_size             = var.vm_size
-  admin_username      = var.admin_username
-  admin_password      = var.admin_password
+  admin_username      = data.azurerm_key_vault_secret.admin_username.value
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
   nic_name            = var.nic_name
   public_ip_name      = var.public_ip_name
   public_subnet_id    = module.networking.public_subnet_id
@@ -48,12 +48,10 @@ module "database" {
   resource_group_name         = azurerm_resource_group.rg.name
   location                    = var.location
   db_name                     = var.db_name
-  db_admin                    = var.db_admin
-  db_password                 = var.db_password
+  db_admin                    = data.azurerm_key_vault_secret.db_admin.value
+  db_password                 = data.azurerm_key_vault_secret.db_password.value
   private_subnet_id           = module.networking.private_subnet_id
   mysql_private_dns_zone_name = module.networking.mysql_private_dns_zone_name
 
   depends_on = [module.networking, module.compute] # Ensure networking & compute exist before DB
 }
-
-
